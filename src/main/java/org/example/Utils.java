@@ -10,11 +10,10 @@ import java.util.List;
 
 public class Utils extends BasePage{
 
-public static void clickOnElement(By by){
-
-    driver.findElement(by).click();
+    public static void clickOnElement(By by){
+        driver.findElement(by).click();
 }
-public static void enterText(By by, String text){
+    public static void enterText(By by, String text){
     driver.findElement(by).sendKeys(text);
 
 }
@@ -58,6 +57,12 @@ public static void enterText(By by, String text){
             e.printStackTrace();
         }
     }
+
+    public static String  getSelectedTextFromDropDown(By by){
+    Select select = new Select(driver.findElement(by));
+    return select.getFirstSelectedOption().getText();
+    }
+
 
 
 

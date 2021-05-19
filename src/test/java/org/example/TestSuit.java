@@ -6,13 +6,14 @@ import org.testng.annotations.Test;
 public class TestSuit extends BaseTest{
       HomePage homePage = new HomePage();
       RegisterPage registerPage = new RegisterPage();
-      ResultPage resultPage = new ResultPage();
+      ResultVerificationPage resultPage = new ResultVerificationPage();
       SearchNikeProducts searchNikeProducts = new SearchNikeProducts();
       ComputerPage computerPage = new ComputerPage();
       SoftwareCategoryPage softwareCategoryPage = new SoftwareCategoryPage();
       NewOnlineStoreIsOpenPage newOnlineStoreIsOpenPage = new NewOnlineStoreIsOpenPage();
+
     @Test
-    public void userShouldBeAbleToLogInSuccessfully(){
+    public void userShouldBeAbleRegisterInSuccessfully(){
         //click on register button
         homePage.clickOnRegisterButton();
         //enter registration details
@@ -23,11 +24,14 @@ public class TestSuit extends BaseTest{
     @Test
     public void userShouldAbleToChangeCurrencySuccessfully(){
         //enter currency
-        homePage.changeCurrencySymbolEuro();
-        //enter dollar currency
-        homePage.changeCurrencySymbolDollar();
+        homePage.selectUSDollarCurrency();
         //verify Currency display in message
-        resultPage.verifyCurrency();
+        homePage.verifyChangeOfCurrencySymbolInEachProductPrice();
+        //enter  currency
+        homePage.selectEuroCurrency();
+        //verify Currency display in message
+        homePage.verifyChangeOfCurrencySymbolInEachProductPrice();
+
     }
 
     @Test
@@ -35,27 +39,31 @@ public class TestSuit extends BaseTest{
         //search nike
         homePage.searchNike();
         searchNikeProducts.nikeProducts();
-        //verify the products with nike name
-        resultPage.verifyNikeProducts();
+
     }
 
     @Test
     public void userShouldAbleToSeeAddToCartButtonPresentForAllTheProducts(){
-        //
+        //click computer
         homePage.clickOnComputers();
+        //click software
         computerPage.clickOnSoftware();
+        //verify all the products have add to cart button
         softwareCategoryPage.addToCartButtonCheck();
 
     }
 
     @Test
     public void userShouldAbleToCommentInNewOnlineStore(){
+        //click on new on line store is open
         homePage.NewOnlineStoreIsOpen();
         newOnlineStoreIsOpenPage.newOnlineStoreOpenComments();
+        //check new message is added
         resultPage.verifyUserShouldSeeSuccessMessage();
+        //check title is added
+        resultPage.verifyTitleIsPresentInTheList();
+        //check comment is added
         resultPage.verifyYourCommentIsPresentInTheList();
-        resultPage.verifyYourCommentIsPresentAtLastInTheList();
-
 
     }
 }
