@@ -23,11 +23,11 @@ public class BaseTest extends Utils {
     @AfterMethod
     public void closeBrowser(ITestResult result){
 
-//        if (!result.isSuccess()){
-//            captureScreenShot(result.getName());
-//        }
-//         close the browser
-//        driver.quit();
+       if (!result.isSuccess()){
+            captureScreenShot(result.getName());
+       }
+       //close the browser
+        driver.quit();
     }
 
 }
