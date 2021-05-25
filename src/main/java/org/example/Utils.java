@@ -1,11 +1,15 @@
 package org.example;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class Utils extends BasePage{
@@ -58,13 +62,24 @@ public class Utils extends BasePage{
         }
     }
 
+    public static String dateStamp(){
+        SimpleDateFormat format = new SimpleDateFormat("ddmmyyHHss");
+        return format.format(new Date());
+    }
+
     public static String  getSelectedTextFromDropDown(By by){
     Select select = new Select(driver.findElement(by));
     return select.getFirstSelectedOption().getText();
     }
 
-
-
+    public static void captureScreenShot(String screenshotName){
+        File screenshotFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(screenshotFile, new File("src/test/resources/screenshots" + screenshotName + dateStamp()+".jpg"));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
 
 }

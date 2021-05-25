@@ -7,6 +7,8 @@ import org.testng.Assert;
 import java.util.List;
 
 public class SoftwareCategoryPage extends Utils{
+    LoadProperty loadProperty = new LoadProperty();
+
     private By _itemBoxes = By.className("item-box");
     private By _addToCartButton = By.cssSelector("button.button-2.product-box-add-to-cart-button");
     private By _productName = By.cssSelector("h2.product-title > a");
@@ -30,7 +32,7 @@ public class SoftwareCategoryPage extends Utils{
             }
         }
         Assert.assertEquals(count, webElementList.size(),"Add to cart button should be "+ webElementList.size() +" but it is "+count+"\n");
-        System.out.println("Add to cart button is present in each product of this page");
+        System.out.println(loadProperty.getProperty("AddToCartButtonComment"));
 
 
     }}

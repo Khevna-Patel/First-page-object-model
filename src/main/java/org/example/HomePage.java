@@ -1,5 +1,6 @@
 package org.example;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -8,17 +9,16 @@ import org.testng.asserts.SoftAssert;
 import java.util.List;
 
 public class HomePage extends Utils{
-    private By _register = By.linkText("Register");
-    //private By _selectUSDollar =
-    //private By _selectEuro =
-    private By _selectCurrency = By.id("customerCurrency");
-    private By _priceList = By.xpath("//span[@class='price actual-price']");
+    private By _register = By.cssSelector("li > a.ico-register");
+    private By _selectCurrency = By.cssSelector("select#customerCurrency");
+    private By _priceList = By.xpath("//span[contains(@class, 'price actual-price')]");
     private By _searchStore = By.xpath("//input[@type='text']");
-    private By _search = By.xpath("//button[@type='submit']");
+    private By _search = By.cssSelector("button[type='submit'");
     private By _clickComputer = By.xpath("//ul[@class='top-menu notmobile']//a[@href='/computers']");
-    private By _clickNewOnlineStoreIsOpen = By.xpath("//div[@class='news-head']//a[@href='/new-online-store-is-open']");
-    private By _USDollar = By.xpath("//select[@id='customerCurrency']");
-    private By _Euro = By.xpath("//select[@id='customerCurrency']");
+    private By _clickNewOnlineStoreIsOpen = By.cssSelector(".news-head:first-of-type>a");
+    private By _USDollar = By.cssSelector("select#customerCurrency");
+    private By _Euro = By.cssSelector("select#customerCurrency");
+    private By _facebookButton = By.cssSelector("li.facebook");
 
     LoadProperty loadProperty = new LoadProperty();
     SoftAssert softAssert = new SoftAssert();
@@ -63,7 +63,7 @@ public class HomePage extends Utils{
             softAssert.assertEquals(priceSymbolActual, expectedCurrencySymbol,"Currency symbol does not match");
         }
         softAssert.assertAll();
-        System.out.println("Each product's Currency Verified Successfully  ");
+        System.out.println(loadProperty.getProperty("EachCurrencyVerify"));
     }
 
     public void searchNike(){
@@ -81,6 +81,26 @@ public class HomePage extends Utils{
     public void NewOnlineStoreIsOpen(){
         //click New online store is open!
         clickOnElement(_clickNewOnlineStoreIsOpen);
+    }
+
+    public void alertHandelingForSearch(){
+        //click on search button
+        clickOnElement(_search);
+        //switch to alert
+        Alert alert = driver.switchTo().alert();
+        //capture alert message
+        String alertMessage = driver.switchTo().alert().getText();
+        //verify the message
+        Assert.assertEquals(alertMessage,"Please enter some search keyword","Entered text does not found");
+        //print alert message
+        System.out.println(alertMessage);
+        //accept alert
+        alert.accept();
+    }
+
+    public void popUpWindowHandelingForFacebook(){
+        //click on facebook
+        clickOnElement(_facebookButton);
     }
 }
 

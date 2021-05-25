@@ -5,26 +5,26 @@ import org.openqa.selenium.By;
 import java.sql.Timestamp;
 
 public class RegisterPage extends Utils{
-    private By _registerButton = By.name("register-button");
-    private By _gender = By.xpath("//input[@id='gender-female']");
-    private By _firstName = By.id("FirstName");
-    private By _lastName = By.id("LastName");
-    private By _dateOfBirthday = By.name("DateOfBirthDay");
-    private By _dateOfBirthMonth = By.name("DateOfBirthMonth");
-    private By _dateOfBirthYear = By.name("DateOfBirthYear");
-    private By _emailId = By.xpath("//input[@id='Email']");
-    private By _company = By.id("Company");
-    private By _newsLetterBox = By.xpath("//input[@Type='checkbox']");
-    private By _password = By.id("Password");
-    private By _confirmPassword = By.id("ConfirmPassword");
-    private By _clickOnRegister = By.name("register-button");
+    private By _registerButton = By.cssSelector("button#register-button");
+    private By _gender = By.cssSelector("input#gender-female");
+    private By _firstName = By.cssSelector("input#FirstName");
+    private By _lastName = By.cssSelector("input#LastName");
+    private By _dateOfBirthday = By.xpath("//select[starts-with(@name,'DateOfBirthDay')]");
+    private By _dateOfBirthMonth = By.xpath("//select[contains(@name,'DateOfBirthMonth')]");
+    private By _dateOfBirthYear = By.xpath("//select[starts-with(@name,'DateOfBirthYear')]");
+    private By _emailId = By.cssSelector("input#Email");
+    private By _company = By.cssSelector("input#Company");
+    private By _newsLetterBox = By.cssSelector("input#Newsletter");
+    private By _password = By.cssSelector("input#Password");
+    private By _confirmPassword = By.cssSelector("input#ConfirmPassword");
+    private By _clickOnRegister = By.cssSelector("button#register-button");
 
     LoadProperty loadProperty = new LoadProperty();
     //Timestamp for current time- to create unique email value each time we run the program
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
     public void enterRegistrationDetails() {
-        waitForClickable(_registerButton,4000);
+        waitForClickable(_registerButton,25);
         //click female in gender
         clickOnElement(_gender);
         //Type First name

@@ -7,6 +7,7 @@ import org.testng.Assert;
 import java.util.List;
 
 public class SearchNikeProducts extends Utils{
+    LoadProperty loadProperty = new LoadProperty();
     private By _itemBoxes = By.className("item-box");
     private By _productNames = By.cssSelector("h2.product-title");
 
@@ -25,11 +26,11 @@ public class SearchNikeProducts extends Utils{
             }
             else {
                 //when condition do not match
-                System.out.println("Product name does not contain Nike ");
+                System.out.println(loadProperty.getProperty("NikeProductName"));
             }
         }
         //assert to check total product name which contains Nike word
         Assert.assertEquals(count,webElementList.size()," Nike word should be present in " + webElementList.size() + " It is present in " + count + "\n");
-        System.out.println("Nike word is present in all product names");
+        System.out.println(loadProperty.getProperty("NikeIsPresentComment"));
     }
 }

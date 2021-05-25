@@ -4,6 +4,7 @@ package org.example;
 import org.testng.annotations.Test;
 
 public class TestSuit extends BaseTest{
+
       HomePage homePage = new HomePage();
       RegisterPage registerPage = new RegisterPage();
       ResultVerificationPage resultPage = new ResultVerificationPage();
@@ -11,6 +12,7 @@ public class TestSuit extends BaseTest{
       ComputerPage computerPage = new ComputerPage();
       SoftwareCategoryPage softwareCategoryPage = new SoftwareCategoryPage();
       NewOnlineStoreIsOpenPage newOnlineStoreIsOpenPage = new NewOnlineStoreIsOpenPage();
+      FaceBookPage faceBookPage = new FaceBookPage();
 
     @Test
     public void userShouldBeAbleRegisterInSuccessfully(){
@@ -57,13 +59,30 @@ public class TestSuit extends BaseTest{
     public void userShouldAbleToCommentInNewOnlineStore(){
         //click on new on line store is open
         homePage.NewOnlineStoreIsOpen();
+        //fill comment details
         newOnlineStoreIsOpenPage.newOnlineStoreOpenComments();
-        //check new message is added
-        resultPage.verifyUserShouldSeeSuccessMessage();
-        //check title is added
-        resultPage.verifyTitleIsPresentInTheList();
-        //check comment is added
-        resultPage.verifyYourCommentIsPresentInTheList();
+        //verify comment added successfully
+        newOnlineStoreIsOpenPage.verifyUserShouldSeeSuccessMessage();
+        //verify comment present in comment list
+       // newOnlineStoreIsOpenPage.verifyCommentIsPresentInTheCommentList();
+        //verify added comment is at last in comment list
+        newOnlineStoreIsOpenPage.verifyAddedCommentIsAtLastInTheList();
+    }
+
+    @Test
+    public void userShouldAbleToGetTheAlertMessage(){
+        //get Alert message
+        homePage.alertHandelingForSearch();
+    }
+
+    @Test
+    public void userShouldAbleToHandelFacebookPopWindow(){
+        //click on facebook
+        homePage.popUpWindowHandelingForFacebook();
+        //get text from facebook page
+        faceBookPage.windowHandle_Facebook();
 
     }
+
+
 }

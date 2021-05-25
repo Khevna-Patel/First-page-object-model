@@ -3,7 +3,7 @@ package org.example;
 import org.openqa.selenium.By;
 
 public class ComputerPage extends Utils{
-    private By _software = By.xpath("//img[@alt='Picture for category Software']");
+    private By _software = By.cssSelector(".active.last .sublist .inactive:nth-of-type(3)>a");
 
     public void clickOnSoftware(){
 
